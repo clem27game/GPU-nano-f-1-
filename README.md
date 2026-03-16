@@ -111,25 +111,6 @@ gcc -o my_app my_app.c -lgpu_nano_f1
 
 ---
 
-## 🏗️ Architecture
-
-### Structure du projet
-
-```
-GPU-nano-f-1/
-├── src/
-│   ├── core/              # Cœur du GPU
-│   ├── memory/            # Gestion mémoire
-│   ├── compute/           # Modules de calcul
-│   └── drivers/           # Pilotes spécifiques
-├── include/               # Fichiers en-tête
-├── examples/              # Exemples d'utilisation
-├── tests/                 # Tests unitaires
-├── docs/                  # Documentation détaillée
-├── CMakeLists.txt         # Configuration de build
-└── README.md              # Ce fichier
-```
-
 ### Composants principaux
 
 #### 1. **Core Module**
