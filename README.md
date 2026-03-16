@@ -228,8 +228,7 @@ Les contributions sont bienvenues ! Pour contribuer :
 
 ## 📝 Licence
 
-[Ajouter votre licence ici - MIT, Apache 2.0, GPL, etc.]
-
+MIT 
 ---
 
 ## ✉️ Contact & Support
