@@ -239,4 +239,67 @@ MIT
 
 ---
 
+# Utilisation (exemple de codes) :
+
+Install :
+!sed -i '/#include <math.h>/a #include <limits.h>' main.c
+!sed -i 's/#define GPU_VRAM_SIZE (10 \* 1024 \* 1024 \* 1024)/#define GPU_VRAM_SIZE (10ULL * 1024 * 1024 * 1024)/' main.c
+!gcc -fPIC -shared main.c -o libgpu_nano_f1.so -fopenmp
+print('--- Diagnostics ---')
+!ldd libgpu_nano_f1.so
+!nm -D libgpu_nano_f1.so | grep omp_unset_lock
+!nm -D /lib/x86_64-linux-gnu/libgomp.so.1 | grep omp_unset_lock
+print('fin')
+
+Export :
+!export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/lib/x86_64-linux-gnu/ && python gpu_nano_f1.py
+print('fin'
+
+Exemple :
+import numpy as np
+
+# Assuming GPUNanoF1 class is defined in gpu_nano_f1.py and imported
+# (If not already imported, you might need to add: from gpu_nano_f1 import GPUNanoF1)
+
+# For this example, let's instantiate the class assuming it's available in the environment
+# Since we are in the same directory, we can directly import it after the previous steps.
+# If `gpu_nano_f1.py` was executed as a script, its definitions might not be in scope.
+# Let's ensure the class is imported for clarity.
+from gpu_nano_f1 import GPUNanoF1
+
+gpu = GPUNanoF1()
+
+# Create a 2x3 tensor
+rows_a, cols_a = 2, 3
+tensor_a_id = gpu.create_tensor(rows_a, cols_a)
+print(f"Created Tensor A with ID: {tensor_a_id}")
+
+# Set data for Tensor A
+data_a = np.array([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]], dtype=np.float32)
+gpu.set_data(tensor_a_id, data_a)
+print(f"Set data for Tensor A:\n{data_a}")
+
+# Get data back from Tensor A to verify
+retrieved_data_a = gpu.get_data(tensor_a_id, (rows_a, cols_a))
+print(f"Retrieved data for Tensor A:\n{retrieved_data_a}")
+
+# Example of memory info
+used_mem, total_mem = gpu.memory_info()
+print(f"GPU Memory Used: {used_mem:.2f} GB / Total: {total_mem:.2f} GB")
+
+# Don't forget to shutdown the GPU context when done
+# gpu.shutdown()
+print('fin')
+
+Résultat :
+
+Created Tensor A with ID: 1
+Set data for Tensor A:
+[[1. 2. 3.]
+ [4. 5. 6.]]
+Retrieved data for Tensor A:
+[[1. 2. 3.]
+ [4. 5. 6.]]
+GPU Memory Used: 0.00 GB / Total: 10.00 GB
+fin
 **Dernière mise à jour** : Mars 2026
