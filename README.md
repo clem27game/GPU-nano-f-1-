@@ -242,6 +242,7 @@ MIT
 # Utilisation (exemple de codes) :
 
 Install :
+```
 !sed -i '/#include <math.h>/a #include <limits.h>' main.c
 !sed -i 's/#define GPU_VRAM_SIZE (10 \* 1024 \* 1024 \* 1024)/#define GPU_VRAM_SIZE (10ULL * 1024 * 1024 * 1024)/' main.c
 !gcc -fPIC -shared main.c -o libgpu_nano_f1.so -fopenmp
@@ -250,12 +251,16 @@ print('--- Diagnostics ---')
 !nm -D libgpu_nano_f1.so | grep omp_unset_lock
 !nm -D /lib/x86_64-linux-gnu/libgomp.so.1 | grep omp_unset_lock
 print('fin')
+```
 
 Export :
+```
 !export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/lib/x86_64-linux-gnu/ && python gpu_nano_f1.py
-print('fin'
+print('fin')
+```
 
 Exemple :
+```
 import numpy as np
 
 # Assuming GPUNanoF1 class is defined in gpu_nano_f1.py and imported
@@ -291,8 +296,10 @@ print(f"GPU Memory Used: {used_mem:.2f} GB / Total: {total_mem:.2f} GB")
 # gpu.shutdown()
 print('fin')
 
+```
 Résultat :
 
+```
 Created Tensor A with ID: 1
 Set data for Tensor A:
 [[1. 2. 3.]
@@ -302,4 +309,5 @@ Retrieved data for Tensor A:
  [4. 5. 6.]]
 GPU Memory Used: 0.00 GB / Total: 10.00 GB
 fin
+```
 **Dernière mise à jour** : Mars 2026
